@@ -7,15 +7,16 @@ const ButtonList = () => {
       <Button name="All" />
       <Button name="Gaming" />
       <Button name="Songs" />
-      <Button name="Live" />
+      <Button name="Football" />
       <Button name="Soccer" />
       <Button name="Cricket" />
       <Button name="Cooking" />
       <Button name="Cricket" />
       <Button name="Valentines" />
-      <Button name="Cricket" />
+      <Button name="Badminton" />
+      <Button name="Boxing" />
       <Button name="Cooking" />
-      <Button name="Cricket" />
+      <Button name="Movies" />
     </div>
   );
 };

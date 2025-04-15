@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { cacheResults } from "../utils/searchSlice";
-import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { userIcon, YOUTUBE_SEARCH_API } from "../utils/constants";
 
 const Head = () => {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const Head = () => {
     dispatch(toggleMenu());
   };
   return (
-    <div className="grid grid-flow-col p-5 m-2 shadow-lg">
+    <div className="grid grid-flow-col p-5 m-2 shadow-lg sticky top-0 z-50 bg-white">
       <div className="flex col-span-1">
         <img
           onClick={() => toggleMenuHandler()}
@@ -62,12 +62,13 @@ const Head = () => {
           />
         </a>
       </div>
-      <div className="col-span-10 px-10">
-        <div>
+      <div className="col-span-10 px-10 justify-center items-center">
+        <div className="flex justify-center">
           <input
             className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full"
             type="text"
             value={searchQuery}
+            placeholder="Search"
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
@@ -77,7 +78,7 @@ const Head = () => {
           </button>
         </div>
         {showSuggestions && (
-          <div className="absolute bg-white py-2 px-0 w-[39rem] mt-1 shadow-lg rounded-lg border border-gray-100">
+          <div className="absolute  bg-white py-2 px-0 w-[39rem] mt-1 shadow-lg rounded-lg border border-gray-100">
             <ul className="list-none m-0 p-0">
               {suggestions.map((s) => (
                 <li key={s} className="w-full py-2 px-4 hover:bg-gray-100 ">
@@ -89,11 +90,7 @@ const Head = () => {
         )}
       </div>
       <div className="col-span-1">
-        <img
-          className="h-8"
-          alt="user"
-          src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-        />
+        <img className="h-8" alt="user" src={userIcon} />
       </div>
     </div>
   );

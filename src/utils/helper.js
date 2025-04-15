@@ -218,3 +218,10 @@ export const findPrime = (num) => {
   }
   return primes[num - 1];
 };
+
+export const formatViews = (views) => {
+  if (views >= 1e9) return (views / 1e9).toFixed(1) + "B views";
+  if (views >= 1e6) return (views / 1e6).toFixed(1) + "M views";
+  if (views >= 1e3) return (views / 1e3).toFixed(1) + "K views";
+  return views + " views";
+};

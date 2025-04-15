@@ -10,4 +10,7 @@ const proxy = "https://cors-anywhere.herokuapp.com/";
 export const YOUTUBE_SEARCH_API =
   proxy +
   "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+
+export const userIcon =
+  "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png";
 // Live Chat >>>> Infinite Scroll >>>>>> Pagination
