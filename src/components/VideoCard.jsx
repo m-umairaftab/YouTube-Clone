@@ -5,7 +5,7 @@ import { userIcon } from "../utils/constants";
 const VideoCard = ({ info }) => {
   if (!info) return null;
 
-  const { snippet, statistics, channelId } = info;
+  const { snippet, statistics } = info;
 
   const { channelTitle, title, thumbnails, publishedAt } = snippet;
   const views = statistics?.viewCount;

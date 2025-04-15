@@ -76,18 +76,19 @@ const Head = () => {
           <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100 cursor-pointer">
             🔍
           </button>
+
+          {showSuggestions && (
+            <div className="absolute bg-white py-2 px-0 w-[39rem] mt-12 shadow-lg rounded-lg border border-gray-100">
+              <ul className="list-none m-0 p-0">
+                {suggestions.map((s) => (
+                  <li key={s} className="w-full py-2 px-4 hover:bg-gray-100 ">
+                    🔍 {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-        {showSuggestions && (
-          <div className="absolute  bg-white py-2 px-0 w-[39rem] mt-1 shadow-lg rounded-lg border border-gray-100">
-            <ul className="list-none m-0 p-0">
-              {suggestions.map((s) => (
-                <li key={s} className="w-full py-2 px-4 hover:bg-gray-100 ">
-                  🔍 {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
       <div className="col-span-1">
         <img className="h-8" alt="user" src={userIcon} />

@@ -109,7 +109,6 @@ const Sidebar = () => {
       <hr className="my-3" />
 
       {/* Subscriptions */}
-      <h1 className="px-2 text-gray-500 uppercase text-xs">Subscriptions</h1>
       <ul className="space-y-2 mt-1">
         <li className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2 cursor-pointer">
           <MdMusicNote size={20} />
