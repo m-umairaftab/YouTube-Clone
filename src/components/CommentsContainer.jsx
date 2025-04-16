@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { COMMENTS_API, GOOGLE_API_KEY } from "../utils/constants";
 
 const commentsData = [
   {
@@ -73,40 +75,81 @@ const commentsData = [
   },
 ];
 
+// Comment Component
 const Comment = ({ data }) => {
-  const { name, text } = data;
+  const { authorProfileImageUrl, authorDisplayName, textOriginal } = data;
   return (
     <div className="flex items-start gap-3 py-3">
       <img
         className="w-10 h-10 rounded-full"
         alt="user"
-        src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+        src={authorProfileImageUrl}
       />
       <div>
-        <p className="font-semibold text-gray-800">{name}</p>
-        <p className="text-gray-700">{text}</p>
+        <p className="font-semibold text-gray-800">{authorDisplayName}</p>
+        <p className="text-gray-700">{textOriginal}</p>
       </div>
     </div>
   );
 };
 
+// Recursive Comments List Component
 const CommentsList = ({ comments }) => {
-  return comments.map((comment, index) => (
-    <div key={index}>
-      <Comment data={comment} />
-      <div className="ml-12">
-        {/* recursive call to render replies */}
-        <CommentsList comments={comment.replies} />
+  return comments?.map((comment, index) => {
+    const topLevel = comment?.snippet?.topLevelComment?.snippet;
+    if (!topLevel) return null;
+
+    return (
+      <div key={index}>
+        <Comment data={topLevel} />
+        <div className="ml-12">
+          {/* Render replies recursively */}
+          <CommentsList
+            comments={comment.replies ? comment.replies.comments : []}
+          />
+        </div>
       </div>
-    </div>
-  ));
+    );
+  });
 };
 
+// Main Comments Container Component
 const CommentsContainer = () => {
+  const [searchParams] = useSearchParams();
+  const videoId = searchParams.get("v"); // Get videoId from URL query
+  const [comments, setComments] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(
+          `${COMMENTS_API}${videoId}&key=${GOOGLE_API_KEY}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch comments");
+        }
+
+        const data = await response.json();
+
+        setComments(data.items); // Set the fetched comments
+      } catch (err) {
+        setError("Failed to load comments.");
+        console.error(err);
+      } finally {
+      }
+    };
+
+    if (videoId) {
+      fetchComments(); // Fetch comments when videoId changes
+    }
+  }, [videoId]);
+
   return (
     <div className="m-5 p-2">
       <h1 className="text-xl font-bold mb-4">Comments</h1>
-      <CommentsList comments={commentsData} />
+      {error ? <p>{error}</p> : <CommentsList comments={comments} />}
     </div>
   );
 };

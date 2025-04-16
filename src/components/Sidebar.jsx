@@ -36,28 +36,19 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link
-            to="/explore"
-            className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2"
-          >
+          <Link className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2">
             <MdOutlineExplore size={20} />
             <span>Explore</span>
           </Link>
         </li>
         <li>
-          <Link
-            to="/shorts"
-            className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2"
-          >
+          <Link className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2">
             <MdWhatshot size={20} />
             <span>Shorts</span>
           </Link>
         </li>
         <li>
-          <Link
-            to="/subscriptions"
-            className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2"
-          >
+          <Link className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2">
             <MdSubscriptions size={20} />
             <span>Subscriptions</span>
           </Link>
@@ -69,37 +60,25 @@ const Sidebar = () => {
       {/* Library */}
       <ul className="space-y-2">
         <li>
-          <Link
-            to="/library"
-            className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2"
-          >
+          <Link className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2">
             <MdVideoLibrary size={20} />
             <span>Library</span>
           </Link>
         </li>
         <li>
-          <Link
-            to="/history"
-            className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2"
-          >
+          <Link className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2">
             <MdHistory size={20} />
             <span>History</span>
           </Link>
         </li>
         <li>
-          <Link
-            to="/watch-later"
-            className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2"
-          >
+          <Link className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2">
             <MdWatchLater size={20} />
             <span>Watch Later</span>
           </Link>
         </li>
         <li>
-          <Link
-            to="/liked"
-            className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2"
-          >
+          <Link className="flex items-center space-x-4 hover:bg-gray-100 rounded-lg p-2">
             <MdThumbUp size={20} />
             <span>Liked Videos</span>
           </Link>

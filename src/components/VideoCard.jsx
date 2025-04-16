@@ -1,6 +1,5 @@
 import React from "react";
 import { formatViews } from "../utils/helper";
-import { userIcon } from "../utils/constants";
 
 const VideoCard = ({ info }) => {
   if (!info) return null;
@@ -11,7 +10,7 @@ const VideoCard = ({ info }) => {
   const views = statistics?.viewCount;
 
   return (
-    <div className="w-72 p-2">
+    <div className="w-[390px] p-2">
       <div className="mb-2">
         <img
           className="rounded-lg w-full aspect-video object-cover"
@@ -23,15 +22,17 @@ const VideoCard = ({ info }) => {
         <img
           className="w-10 h-10 rounded-full mr-3"
           alt="channel icon"
-          src={userIcon}
+          src={thumbnails?.default?.url}
         />
         <div>
-          <h3 className="font-semibold text-sm line-clamp-2">{title}</h3>
-          <p className="text-gray-600 text-xs">{channelTitle}</p>
-          <p className="text-gray-600 text-xs">
-            {views ? formatViews(views) : "•"} •{" "}
-            {new Date(publishedAt).toLocaleDateString()}
-          </p>
+          <div className="w-full overflow-hidden">
+            <h3 className="font-semibold text-sm line-clamp-2 ">{title}</h3>
+            <p className="text-gray-600 text-xs">{channelTitle}</p>
+            <p className="text-gray-600 text-xs">
+              {views ? formatViews(views) : "•"} •{" "}
+              {new Date(publishedAt).toLocaleDateString()}
+            </p>
+          </div>
         </div>
       </div>
     </div>

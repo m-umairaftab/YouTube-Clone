@@ -13,6 +13,12 @@ const Head = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) setSearchQuery(q);
+  }, []);
+
+  useEffect(() => {
     // console.log(searchQuery);
 
     const timer = setTimeout(() => {
@@ -46,7 +52,7 @@ const Head = () => {
     dispatch(toggleMenu());
   };
   return (
-    <div className="grid grid-flow-col p-5 m-2 shadow-lg sticky top-0 z-50 bg-white">
+    <div className="grid grid-flow-col p-5 shadow-lg sticky top-0 z-50 bg-white">
       <div className="flex col-span-1">
         <img
           onClick={() => toggleMenuHandler()}
@@ -72,16 +78,38 @@ const Head = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                window.location.href =
+                  "/search?q=" + encodeURIComponent(searchQuery);
+              }
+            }}
           />
-          <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100 cursor-pointer">
+          <button
+            onClick={() => {
+              window.location.href =
+                "/search?q=" + encodeURIComponent(searchQuery);
+            }}
+            className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100 cursor-pointer"
+          >
             🔍
           </button>
 
-          {showSuggestions && (
+          {showSuggestions && suggestions.length > 0 && (
             <div className="absolute bg-white py-2 px-0 w-[39rem] mt-12 shadow-lg rounded-lg border border-gray-100">
               <ul className="list-none m-0 p-0">
                 {suggestions.map((s) => (
-                  <li key={s} className="w-full py-2 px-4 hover:bg-gray-100 ">
+                  <li
+                    key={s}
+                    className="w-full py-2 px-4 hover:bg-gray-100"
+                    onMouseDown={(e) => {
+                      // Use onMouseDown instead of onClick to avoid blur firing first
+                      e.preventDefault(); // Prevent default behavior
+                      setSearchQuery(s); // Update input
+                      window.location.href =
+                        "/search?q=" + encodeURIComponent(s);
+                    }}
+                  >
                     🔍 {s}
                   </li>
                 ))}
@@ -90,7 +118,7 @@ const Head = () => {
           )}
         </div>
       </div>
-      <div className="col-span-1">
+      <div className="col-span-1 flex justify-end">
         <img className="h-8" alt="user" src={userIcon} />
       </div>
     </div>
